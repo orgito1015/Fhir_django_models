@@ -159,7 +159,13 @@ class DomainResource(Resource):
         related_name='%(class)s_resource'
     )
     # Contained, inline Resources (0..* Resource)
-    contained = GenericRelation('self', related_query_name='container_resource', blank=True)
+    contained = GenericRelation(
+        'self',
+        content_type_field='container_type',
+        object_id_field='container_id',
+        related_query_name='container_resource',
+        blank=True,
+    )
     # Extensions (0..* Extension)
     extension = GenericRelation('components.Extension', related_query_name='domain_resource', blank=True)
     # Modifier Extensions that cannot be ignored (0..* Extension)

@@ -54,14 +54,14 @@ class Organization(DomainResource):
     def clean(self):
         super().clean()
         # FHIR Rule: The organization SHALL at least have a name or an identifier
-        has_identifier = self.pk and self.identifier.exists()
+        has_identifier = self.pk and self.identifiers.exists()
         has_name = bool(self.name and self.name.strip())
         if not (has_identifier or has_name):
             raise ValidationError("Organization must have at least a name or an identifier")
         
         # FHIR Rules: Organization contact telecom/address cannot be 'home' use
         if self.pk:
-            for contact_detail in self.contact.all():
+            for contact_detail in self.contacts.all():
                 for telecom in contact_detail.telecom.all():
                     if telecom.use == 'home':
                         raise ValidationError("Organization contact telecom cannot have 'home' use")

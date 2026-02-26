@@ -163,7 +163,7 @@ class Encounter(DomainResource):
     # Quantity of time the encounter lasted (0..1 Duration)
     length = models.ForeignKey('components.Duration', null=True, blank=True, on_delete=models.SET_NULL, related_name='encounters')
     
-	# The list of reason relevant to this encounter (BackboneElement - handled via reverse FK)
+    # The list of reason relevant to this encounter (BackboneElement - handled via reverse FK)
     # Note: EncounterReason handles this
     
     # The list of diagnosis relevant to this encounter (BackboneElement - handled via reverse FK)
