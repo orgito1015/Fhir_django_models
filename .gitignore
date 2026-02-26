@@ -3,3 +3,6 @@
 runDockerLocally.sh
 CLAUDE.md
 .gitignore
+__pycache__/
+*.pyc
+*.pyo
